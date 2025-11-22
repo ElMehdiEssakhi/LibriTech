@@ -1,13 +1,5 @@
 package org.example.view;
-
-import org.example.model.Livre;
-import org.example.model.Utilisateur;
 import org.example.service.BibliothequeService;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class BiblioView {
@@ -15,9 +7,9 @@ public class BiblioView {
     UtilisateurView utilisateurView;
     EmpruntView empruntView;
     public BiblioView(LivreView livreView, UtilisateurView utilisateurView, EmpruntView empruntView) {
-        this.livreView=livreView;
-        this.utilisateurView=utilisateurView;
-        this.empruntView=empruntView;
+        this.livreView = livreView;
+        this.utilisateurView = utilisateurView;
+        this.empruntView = empruntView;
     }
     public void start(){
         while (true) {
