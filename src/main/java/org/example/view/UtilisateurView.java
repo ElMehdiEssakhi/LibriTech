@@ -31,10 +31,10 @@ public class UtilisateurView {
     public void modifyUser() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Entrer ID du utilisateur:");
-        int utilisateurId = sc.nextInt();
-        System.out.print("Entrer le nouveau nom de l'auteur:  ");
+        int utilisateurId = Integer.parseInt(sc.nextLine());
+        System.out.print("Entrer le nouveau nom de l'utilisateur:  ");
         String nom = sc.nextLine();
-        System.out.println("Entrer le nouveau prenom de l'auteur: ");
+        System.out.println("Entrer le nouveau prenom de l'utilisateur: ");
         String prenom = sc.nextLine();
         bibliothequeService.modifierUtilisateur(new Utilisateur(utilisateurId,nom,prenom));
     }
