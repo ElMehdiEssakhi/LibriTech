@@ -44,7 +44,7 @@ public class EmpruntDAO {
     }
 
     public void modifierEmprunt(Emprunt emprunt) {
-        String sql = "UPDATE emprunts SET livre_id=? ,utilisateur_id=?, date_emprunt=?,date_retour = ? WHERE id = ?";
+        String sql = "UPDATE emprunts SET livre_id=? ,utilisateur_id=?, dateEmprunt=?,dateRetour = ? WHERE id = ?";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, emprunt.getLivre().getId());
             stmt.setInt(2, emprunt.getUtilisateur().getId());
@@ -75,8 +75,8 @@ public class EmpruntDAO {
                     e.setLivre(livreDAO.chercherLivreParId(rs.getInt("livre_id")));
                     e.setUtilisateur(utilisateurDAO.chercherUtilisateurParId(rs.getInt("utilisateur_id")));
 
-                    e.setDateEmprunt(rs.getDate("date_emprunt").toLocalDate());
-                    Date retour = rs.getDate("date_retour");
+                    e.setDateEmprunt(rs.getDate("dateEmprunt").toLocalDate());
+                    Date retour = rs.getDate("dateRetour");
                     if (retour != null) e.setDateRetour(retour.toLocalDate());
 
                     return e;
