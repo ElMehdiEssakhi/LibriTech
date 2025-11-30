@@ -36,12 +36,12 @@ public class EmpruntView {
     }
     public void modifyEmprunt() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Entrez l'ID du livre : ");
-        int emId= sc.nextInt();
-        System.out.print("Entrez l'ID de l'utilisateur : ");
-        int utilisateurId = sc.nextInt();
+        System.out.print("Entrez l'ID de l'emprunt  : ");
+        int emId= Integer.parseInt(sc.nextLine());
         System.out.print("Entrez l'ID du livre :");
-        int livreId = sc.nextInt();
+        int livreId = Integer.parseInt(sc.nextLine());
+        System.out.print("Entrez l'ID de l'utilisateur : ");
+        int utilisateurId = Integer.parseInt(sc.nextLine());
         System.out.print("Entrez la date d'emprunt (yyyy-MM-dd) : ");
         LocalDate dateEmprunt = LocalDate.parse(sc.nextLine());
         System.out.print("Entrez la date du Retour (yyyy-MM-dd) : ");

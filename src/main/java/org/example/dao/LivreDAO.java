@@ -15,16 +15,16 @@ public class LivreDAO {
     }
 
     public void ajouterLivre(Livre livre){
-        String sql = "INSERT INTO livres( titre, auteur, annee, type, genre) VALUES (?, ?, ?, ?, 'Roman', ?)";
-        String sql2 = "INSERT INTO livres( titre, auteur, annee, type, niveau_scolaire) VALUES (?, ?, ?, ?, 'ManuelScolaire', ?)";
+        String sql = "INSERT INTO livres( titre, auteur, anneePublication, type, genre) VALUES (?, ?, ?, 'Roman', ?)";
+        String sql2 = "INSERT INTO livres( titre, auteur, anneePublication, type, niveauScolaire) VALUES (?, ?, ?, 'ManuelScolaire', ?)";
         PreparedStatement stmt;
         try {
             if (livre instanceof Roman rm) {
                 stmt = con.prepareStatement(sql);
-                stmt.setString(5, rm.getGenre());
+                stmt.setString(4, rm.getGenre());
             }else if (livre instanceof ManuelScolaire ms) {
                 stmt = con.prepareStatement(sql2);
-                stmt.setString(5, ms.getNiveauScolaire());
+                stmt.setString(4, ms.getNiveauScolaire());
             }else return;
             stmt.setString(1, livre.getTitre());
             stmt.setString(2, livre.getAuteur());
@@ -45,21 +45,21 @@ public class LivreDAO {
         }
     }
     public void modifierLivre(Livre livre){
-        String sql = "UPDATE livres SET   titre = ?, auteur = ?, annee = ?, type = 'Roman', genre =?  WHERE id = ?";
-        String sql2 = "UPDATE livres SET  titre = ?, auteur = ?, annee = ?, type = 'ManuelScolaire', niveau_scolaire =?  WHERE id = ?";
+        String sql = "UPDATE livres SET   titre = ?, auteur = ?, anneePublication = ?, type = 'Roman', genre =?  WHERE id = ?";
+        String sql2 = "UPDATE livres SET  titre = ?, auteur = ?, anneePublication = ?, type = 'ManuelScolaire', niveau_scolaire =?  WHERE id = ?";
         PreparedStatement stmt;
         try {
             if (livre instanceof Roman rm) {
                 stmt = con.prepareStatement(sql);
-                stmt.setString(5, rm.getGenre());
+                stmt.setString(4, rm.getGenre());
             }else if (livre instanceof ManuelScolaire ms) {
                 stmt = con.prepareStatement(sql2);
-                stmt.setString(5, ms.getNiveauScolaire());
+                stmt.setString(4, ms.getNiveauScolaire());
             }else return;
-            stmt.setString(2, livre.getTitre());
-            stmt.setString(3, livre.getAuteur());
-            stmt.setDate(4, Date.valueOf(livre.getAnneePublication()));
-            stmt.setInt(6, livre.getId());
+            stmt.setString(1, livre.getTitre());
+            stmt.setString(2, livre.getAuteur());
+            stmt.setDate(3, Date.valueOf(livre.getAnneePublication()));
+            stmt.setInt(5, livre.getId());
 
         }catch (SQLException e) {
             System.out.println("Erreur lors de la modification : " + e.getMessage());
@@ -81,7 +81,7 @@ public class LivreDAO {
                     livre = roman;
                 } else if ("ManuelScolaire".equalsIgnoreCase(type)) {
                     ManuelScolaire ms = new ManuelScolaire();
-                    ms.setNiveauScolaire(rs.getString("niveau_scolaire"));
+                    ms.setNiveauScolaire(rs.getString("niveauScolaire"));
                     livre = ms;
                 } else {
                     livre = new Livre();
@@ -89,7 +89,7 @@ public class LivreDAO {
                 livre.setId(rs.getInt("id"));
                 livre.setTitre(rs.getString("titre"));
                 livre.setAuteur(rs.getString("auteur"));
-                livre.setAnneePublication(rs.getDate("annee").toLocalDate());
+                livre.setAnneePublication(rs.getDate("anneePublication").toLocalDate());
                 livres.add(livre);
             }
 
@@ -114,7 +114,7 @@ public class LivreDAO {
                     livre = rm;
                 } else if ("ManuelScolaire".equalsIgnoreCase(type)) {
                     ManuelScolaire ms  = new ManuelScolaire();
-                    ms.setNiveauScolaire(rs.getString("niveau_scolaire"));
+                    ms.setNiveauScolaire(rs.getString("niveauScolaire"));
                     livre = ms;
                 }else {
                     livre = new Livre();
@@ -122,13 +122,13 @@ public class LivreDAO {
                 livre.setId(rs.getInt("id"));
                 livre.setTitre(rs.getString("titre"));
                 livre.setAuteur(rs.getString("auteur"));
-                livre.setAnneePublication(rs.getDate("annee").toLocalDate());
+                livre.setAnneePublication(rs.getDate("anneePublication").toLocalDate());
                 return livre;
             }
 
         } catch (SQLException e) {
             System.out.println("Erreur lors de la recherche : " + e.getMessage());
         }
-        return null; // si non trouvé
+        return null;
     }
 }

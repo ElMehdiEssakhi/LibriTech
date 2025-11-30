@@ -6,7 +6,12 @@ public class ManuelScolaire extends Livre{
     private String niveauScolaire;
 
     public ManuelScolaire(int id, String titre, String auteur, LocalDate anneePublication, String niveauScolaire) {
-        super(id, titre,auteur,  anneePublication);
+        super(id, titre, auteur, anneePublication);
+        this.niveauScolaire = niveauScolaire;
+    }
+
+    public ManuelScolaire(String titre, String auteur, LocalDate anneePublication, String niveauScolaire) {
+        super(titre,auteur,  anneePublication);
         this.niveauScolaire=niveauScolaire;
 
     }

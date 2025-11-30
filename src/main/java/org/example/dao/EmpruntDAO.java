@@ -16,7 +16,7 @@ public class EmpruntDAO {
     }
 
     public void ajouterEmprunt(Emprunt emprunt){
-        String sql = "INSERT INTO emprunts(livre_id, utilisateur_id, date_emprunt, date_retour) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO emprunts(livre_id, utilisateur_id, dateEmprunt, dateRetour) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, emprunt.getLivre().getId());
             stmt.setInt(2, emprunt.getUtilisateur().getId());
@@ -49,6 +49,7 @@ public class EmpruntDAO {
             stmt.setInt(1, emprunt.getLivre().getId());
             stmt.setInt(2, emprunt.getUtilisateur().getId());
             stmt.setDate(3, Date.valueOf(emprunt.getDateEmprunt()));
+            System.out.println(emprunt.getDateRetour());
             if (emprunt.getDateRetour() != null) {
                 stmt.setDate(4, Date.valueOf(emprunt.getDateRetour()));
             } else {
@@ -99,9 +100,9 @@ public class EmpruntDAO {
                 e.setId(rs.getInt("id"));
                 e.setLivre(livreDAO.chercherLivreParId(rs.getInt("livre_id")));
                 e.setUtilisateur(utilisateurDAO.chercherUtilisateurParId(rs.getInt("utilisateur_id")));
-                e.setDateEmprunt(rs.getDate("date_emprunt").toLocalDate());
+                e.setDateEmprunt(rs.getDate("dateEmprunt").toLocalDate());
 
-                Date retour = rs.getDate("date_retour");
+                Date retour = rs.getDate("dateRetour");
                 if (retour != null) e.setDateRetour(retour.toLocalDate());
 
                 emprunts.add(e);

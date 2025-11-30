@@ -79,8 +79,8 @@ public class Emprunt {
     public String toString() {
         return "Emprunt{" +
                 "id=" + id +
-                ", livre=" + livre +
-                ", utilisateur=" + utilisateur +
+                ", " + livre +
+                ", " + utilisateur +
                 ", dateEmprunt=" + dateEmprunt +
                 ", dateRetour=" + dateRetour +
                 '}';

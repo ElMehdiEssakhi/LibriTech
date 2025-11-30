@@ -1,6 +1,9 @@
 package org.example.view;
 
 import org.example.model.Livre;
+import org.example.model.ManuelScolaire;
+import org.example.model.Roman;
+import org.example.model.Utilisateur;
 import org.example.service.BibliothequeService;
 
 import java.time.LocalDate;
@@ -20,19 +23,39 @@ public class LivreView {
         String nomAutheur = sc.nextLine();
         System.out.println("entrer le date de publication:");
         LocalDate datePublication = LocalDate.parse(sc.nextLine());
-        bibliothequeService.ajouterLivre(new Livre(nomAutheur,titreLivre,datePublication));
+        System.out.println("entrer le type du livre:");
+        String typeLivre = sc.nextLine();
+        if (typeLivre.equals("Roman")){
+            System.out.println("entrer le genre du roman:");
+            String genre = sc.nextLine();
+            bibliothequeService.ajouterLivre(new Roman(titreLivre, nomAutheur, datePublication, genre));
+        }else if (typeLivre.equals("ManuelScolaire")){
+            System.out.println("entrer le niveau scolaire du manuel:");
+            String niveauScolaire = sc.nextLine();
+            bibliothequeService.ajouterLivre(new ManuelScolaire(titreLivre, nomAutheur, datePublication, niveauScolaire));
+        }
     }
     public void modifyLivre(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Entrer ID du livre:");
-        int id = Integer.parseInt(sc.nextLine());
-        System.out.print("Entrer le nouveau titre du livre: ");
-        String titreLivre = sc.nextLine();
-        System.out.print("Entrer le nouveau nom de l'auteur: ");
-        String nomAuteur = sc.nextLine();
-        System.out.print("Entrer la nouvelle date de publication (yyyy-MM-dd): ");
-        String input = sc.nextLine();
-        bibliothequeService.modifierLivre(new Livre(id,titreLivre,nomAuteur,LocalDate.parse(input)));
+        int livreId = Integer.parseInt(sc.nextLine());
+        System.out.print("Entrer le nouveau Titre:  ");
+        String titre = sc.nextLine();
+        System.out.println("Entrer le nouveau prenom de l'auteur: ");
+        String Auteur = sc.nextLine();
+        System.out.println("entrer la nouvelle date de publication:");
+        LocalDate datePublication = LocalDate.parse(sc.nextLine());
+        System.out.println("entrer le nouveau type du livre:");
+        String typeLivre = sc.nextLine();
+        if (typeLivre.equals("Roman")){
+            System.out.println("entrer le nouveau genre du roman:");
+            String genre = sc.nextLine();
+            bibliothequeService.modifierLivre(new Roman(livreId,titre, Auteur, datePublication, genre));
+        }else if (typeLivre.equals("ManuelScolaire")){
+            System.out.println("entrer le nouveau niveau scolaire du manuel:");
+            String niveauScolaire = sc.nextLine();
+            bibliothequeService.modifierLivre(new ManuelScolaire(livreId,titre, Auteur, datePublication, niveauScolaire));
+        }
     }
     public void listerLivres() {
         List<Livre> livres=bibliothequeService.listerLivres();

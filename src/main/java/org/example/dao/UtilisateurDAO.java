@@ -14,7 +14,7 @@ public class UtilisateurDAO {
     }
 
     public void ajouterUtilisateur(Utilisateur user){
-        String sql = "INSERT INTO users(nom, prenom) VALUES (?, ?)";
+        String sql = "INSERT INTO utilisateurs(nom, prenom) VALUES (?, ?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
@@ -27,7 +27,7 @@ public class UtilisateurDAO {
         }
     }
     public void supprimreUtilisateur(int utilisateurId){
-        String sql = "DELETE FROM users WHERE id = ?";
+        String sql = "DELETE FROM utilisateurs WHERE id = ?";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, utilisateurId);
             stmt.executeUpdate();
@@ -36,7 +36,7 @@ public class UtilisateurDAO {
         }
     }
     public void modifierUtilisateur(Utilisateur user){
-        String sql = "UPDATE users SET nom = ?, prenom = ? WHERE id = ?";
+        String sql = "UPDATE utilisateurs SET nom = ?, prenom = ? WHERE id = ?";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, user.getNom());
             stmt.setString(2, user.getPrenom());
@@ -48,7 +48,7 @@ public class UtilisateurDAO {
     }
     public List<Utilisateur> listerUtilisateur(){
         List<Utilisateur> utilisateurs = new ArrayList<>();
-        String sql = "SELECT * FROM utilisateur";
+        String sql = "SELECT * FROM utilisateurs";
         try (PreparedStatement stmt=con.prepareStatement(sql)){
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -65,7 +65,7 @@ public class UtilisateurDAO {
         return utilisateurs;
     }
     public Utilisateur chercherUtilisateurParId(int id) {
-        String sql = "SELECT * FROM users WHERE id = ?";
+        String sql = "SELECT * FROM utilisateurs WHERE id = ?";
         Utilisateur utilisateur = null;
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, id);
